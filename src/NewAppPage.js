@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-import { Box, Button, Form, Text, TextInput, FileInput, FormField } from 'grommet';
+import { Box, Button, Form, Text, TextInput, FileInput, FormField, CheckBox } from 'grommet';
 
 class NewAppPage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSigned: true
+    };
+  }
+
   render() {
     return (
       <Box align='center' background='darkColor' direction='column' round='medium' pad='large' gap='medium' style={{ minWidth: '500pt'}}>
@@ -15,6 +23,7 @@ class NewAppPage extends Component {
           formData.append("appName", value.displayName);
           formData.append("secretKey", value.authKey);
           formData.append("versionString", value.versionString);
+          formData.append("isSigned", this.state.isSigned)
           for(let i =0; i < value.iconFile.length; i++) {
             formData.append("iconFile", value.iconFile[i]);
           }
@@ -51,6 +60,11 @@ class NewAppPage extends Component {
               />
             </FormField>
           </Box>
+          <CheckBox 
+            checked={this.state.isSigned}
+            label='Already Signed'
+            onChange={ (e) => { this.setState({ isSigned: e.target.checked }) } }
+          />
           <FormField name='appBundleID' htmlFor='bundleID-id'>
             <TextInput
               placeholder='App Bundle ID'

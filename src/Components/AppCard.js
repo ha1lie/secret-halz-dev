@@ -12,6 +12,7 @@ class AppCard extends Component {
   }
 
   render() {
+    console.log(this.props.app.versions[0].plistLocation);
     return <Box align='center' background='darkColor' direction='row' round='medium' pad='large' gap='medium'>
       <ResponsiveContext.Consumer>
         { size => (
